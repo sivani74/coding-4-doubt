@@ -74,14 +74,14 @@ app.get("/players/:playerId/", async (request, response) => {
 
 app.put("/players/:playerId/", async (request, response) => {
   const { playerId } = request.params;
-  const details = request.body;
-  const { playerName, jerseyNumber, role } = details;
+  const detail = request.body;
+  const { playerName, jerseyNumber, role } = detail;
   const api4 = `
     UPDATE
     cricket_team
     SET
     player_name = '${playerName}',
-    jersey_name = ${jerseyName},
+   jersey_number = ${jerseyNumber},
     role = '${role}'
     WHERE
     player_id = ${playerId};`;
@@ -96,7 +96,7 @@ app.delete("/players/:playerId/", async (request, response) => {
     FROM
         cricket_team
     WHERE
-        plater_id = ${playerId};`;
+        player_id =  ${playerId};`;
   await db.run(api5);
   response.send("Player Removed");
 });
